@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Konversi Gambar ke ASCII</title>
+</head>
+<body>
+    <h1>Upload Gambar</h1>
+    <input type="file" id="imageUpload">
+    <button onclick="convertImage()">Konversi</button>
+    <pre id="asciiArt"></pre>
+
+    <script>
+        function convertImage() {
+            const fileInput = document.getElementById('imageUpload');
+            const file = fileInput.files[0];
+
+            const formData = new FormData();
+            formData.append('image', file);
+
+            fetch('/', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.text())
+            .then(asciiArt => {
+                document.getElementById('asciiArt').textContent = asciiArt;
+            })
+            .catch(error => console.error(error));
+        }
+    </script>
+</body>
+</html>
